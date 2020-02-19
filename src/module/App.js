@@ -9,9 +9,13 @@ const divCenter = {
 }
 
 class AppCountDown extends React.Component {
-  constructor() {
-    super();
-    this.state = { time: {}, seconds: 1800 };
+  constructor(props) {
+    super(props);
+    this.state = { 
+      time: {}, 
+      seconds: 1800,
+      isToggleOn:true
+     };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);

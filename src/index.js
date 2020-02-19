@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 
 function tick(){
     ReactDOM.render(
-        <Clock date={new Date()} name="Niava" />, document.getElementById('root')
+        <Clock />, document.getElementById('root')
     );
 }
 
