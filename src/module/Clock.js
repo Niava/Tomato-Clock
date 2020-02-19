@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const myStyle = {
     color:'red',
@@ -14,8 +13,9 @@ class Clock extends React.Component{
         super(props);
         this.state = {
             date:new Date(),
-            name: 'Niava'
-        }
+            name: 'Niava',
+        };
+        
     }
     
     componentDidMount(){

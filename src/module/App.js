@@ -15,7 +15,7 @@ class AppCountDown extends React.Component {
       time: {}, 
       seconds: 1800,
       isToggleOn:true
-     };
+    };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
@@ -41,6 +41,9 @@ class AppCountDown extends React.Component {
   }
 
   startTimer() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
     if (this.timer === 0 && this.state.seconds > 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
@@ -63,7 +66,7 @@ class AppCountDown extends React.Component {
   render() {
     return(
       <div style={divCenter}>
-        <button onClick={this.startTimer}>Click to Start</button>
+        <button onClick={this.startTimer}>{this.state.isToggleOn ? 'Click to Start' : 'Clock Running'}</button>
         <h1>S:{this.state.time.s}</h1>
         <h1>M:{this.state.time.m}</h1>
       </div>
