@@ -16,11 +16,11 @@ class AppCountDown extends React.Component {
       seconds: 1800,
       isToggleOn:true,
       clickCount:0,
+      opacity:1,
     };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
-    
   }
 
   secondsToTime(secs){
@@ -40,13 +40,23 @@ class AppCountDown extends React.Component {
   componentDidMount() {
     let timeLeftVar = this.secondsToTime(this.state.seconds);
     this.setState({ time: timeLeftVar });
+    this.timerCount = setInterval(() => {
+      var opacity = this.state.opacity;
+      opacity -= 0.05;
+      if(opacity<0.1){
+        opacity = 1;
+      }
+      this.setState({
+        opacity:opacity
+      }); 
+    },60);
   }
 
   startTimer() {
     this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn
     }));
-    this.setState(function(state){
+    this.setState(state => {
       return {clickCount: state.clickCount + 1};
     });
     if (this.timer === 0 && this.state.seconds > 0) {
@@ -56,7 +66,7 @@ class AppCountDown extends React.Component {
 
   countDown() {
     // Remove one second, set state so a re-render happens.
-    let seconds = this.state.seconds - 1;
+  let seconds = this.state.seconds - 1;
     this.setState({
       time: this.secondsToTime(seconds),
       seconds: seconds,
@@ -72,9 +82,8 @@ class AppCountDown extends React.Component {
     return(
       <div style={divCenter}>
         <button onClick={this.startTimer}>{this.state.isToggleOn ? 'Click to Start' : 'Clock Running'}</button>
-        <h3>Tody You've Clicked {this.state.clickCount} times</h3>
-        <h1>S:{this.state.time.s}</h1>
-        <h1>M:{this.state.time.m}</h1>
+        <h3>Tody You've timed {this.state.clickCount}.</h3>
+        <h1>{this.state.time.m} <span style={{opacity:this.state.opacity}}>:</span> {this.state.time.s}</h1>
       </div>
     );
   }
